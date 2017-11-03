@@ -501,8 +501,31 @@ class PivotTableViz(BaseViz):
                 any(v in groupby for v in columns) or
                 any(v in columns for v in groupby)):
             raise Exception(_("'Group By' and 'Columns' can't overlap"))
+        fd = self.form_data
+        if fd.get('order_by_cols'):
+            order_by_cols = fd.get('order_by_cols') or []
+            d['orderby'] = [json.loads(t) for t in order_by_cols]
         return d
+        # d = super(PivotTableViz, self).query_obj()
+        # fd = self.form_data
+        #
+        # # if fd.get('all_columns') and (fd.get('groupby') or fd.get('metrics')):
+        # #     raise Exception(_(
+        # #         "Choose either fields to [Group By] and [Metrics] or "
+        # #         "[Columns], not both"))
+        #
+        # sort_by = fd.get('timeseries_limit_metric')
 
+        #
+        # # Add all percent metrics that are not already in the list
+        # if 'percent_metrics' in fd:
+        #     d['metrics'] = d['metrics'] + list(filter(
+        #         lambda m: m not in d['metrics'],
+        #         fd['percent_metrics']
+        #     ))
+        #
+        # d['is_timeseries'] = self.should_be_timeseries()
+        # return d
     def get_data(self, df):
         if (
                 self.form_data.get("granularity") == "all" and

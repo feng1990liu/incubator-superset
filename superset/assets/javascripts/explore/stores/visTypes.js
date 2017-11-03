@@ -417,9 +417,18 @@ export const visTypes = {
         expanded: true,
         controlSetRows: [
           ['groupby', 'columns'],
-          ['metrics'],
+          ['metrics','order_by_cols'],
         ],
       },
+//       ADD BY TJW
+//      {
+//        label: t('NOT GROUPED BY'),
+//        description: t('Use this section if you want to query atomic rows'),
+//        controlSetRows: [
+//          ['all_columns'],
+//          ['order_by_cols'],
+//        ],
+//      },
       {
         label: t('Pivot Options'),
         controlSetRows: [
